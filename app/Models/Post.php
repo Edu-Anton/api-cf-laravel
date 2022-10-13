@@ -14,6 +14,20 @@ class Post extends Model
 {
     use HasFactory, ApiTrait;
 
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array<int, string>
+     */
+    protected $fillable = [
+        'name',
+        'slug',
+        'extract',
+        'body',
+        'category_id',
+        'user_id'
+    ];
+    
     const BORRADOR = 1;
     const PUBLICADO = 2;
 
