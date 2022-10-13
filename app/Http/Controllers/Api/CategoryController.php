@@ -15,7 +15,11 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $categories = Category::all();
+        $categories = Category::included()
+                                ->filter()
+                                ->sort()
+                                ->getOrPaginate();
+                                
 
         return $categories;
     }
@@ -45,9 +49,12 @@ class CategoryController extends Controller
      * @return \Illuminate\Http\Response
      */
     // public function show($id)
-    public function show(Category $category)
+    public function show($id)
     {
         // $category = Category::findOrFail($id); Al usar la instancia $category, ya queda almacenada la información de la instancia
+        // $category = Category::with('posts')->findOrFail($id);
+        // $category = Category::with(['posts.user'])->findOrFail($id);
+        $category = Category::included()->findOrFail($id);
         return $category;
     }
 
